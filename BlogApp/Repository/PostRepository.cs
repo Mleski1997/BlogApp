@@ -19,5 +19,10 @@ namespace BlogApp.Repository
         {
            return await _context.Posts.ToListAsync();
         }
+
+        public async Task<Post> GetPostAsync(int id)
+        {
+            return _context.Posts.FirstOrDefault(i => i.Id == id);
+        }
     }
 }

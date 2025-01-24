@@ -18,5 +18,10 @@ namespace BlogApp.Services
         {
             return await _postRepository.GetAllPostsAsync();
         }
+
+        public Task<Post> GetPostAsync(int id)
+        {
+            return _postRepository.GetPostAsync(id);
+        }
     }
 }
