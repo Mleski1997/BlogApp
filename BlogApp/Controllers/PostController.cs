@@ -45,12 +45,16 @@ namespace BlogApp.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddPost([FromBody] PostDTO postDTO)
         {
-
-
-         await _postService.AddPostAsync(postDTO);
-
-            return CreatedAtAction(nameof(GetPost), new {id = postDTO.Id}, value:null);
+          await _postService.AddPostAsync(postDTO);
+          return CreatedAtAction(nameof(GetPost), new {id = postDTO.Id}, value:null);
         }
 
+        [HttpDelete("delete")]
+
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            await _postService.DeletePostAsync(id);
+            return Ok();
+        }
     }
 }

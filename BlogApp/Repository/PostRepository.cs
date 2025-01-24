@@ -21,6 +21,12 @@ namespace BlogApp.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeletePostAsync(Post post)
+        {
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Post>> GetAllPostsAsync()
         {
            return await _context.Posts.ToListAsync();

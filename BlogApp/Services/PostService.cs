@@ -25,6 +25,12 @@ namespace BlogApp.Services
             await _postRepository.AddPostAsync(Post);
         }
 
+        public async Task DeletePostAsync(int id)
+        {
+            var post = await _postRepository.GetPostAsync(id);
+            await _postRepository.DeletePostAsync(post);
+        }
+
         public async Task<IEnumerable<Post>> GetAllPostsAsync()
         {
             return await _postRepository.GetAllPostsAsync();

@@ -40,5 +40,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApp.Controllers.PostController",
+    "Method": "DeletePost",
+    "RelativePath": "Post/delete",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
