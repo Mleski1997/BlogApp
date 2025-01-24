@@ -1,6 +1,6 @@
-﻿namespace BlogApp.Dto
+﻿namespace BlogApp.DTO
 {
-    public class PostDto
+    public class PostDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }

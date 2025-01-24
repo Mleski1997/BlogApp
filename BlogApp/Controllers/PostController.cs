@@ -1,5 +1,7 @@
-using BlogApp.Data;
+
+using BlogApp.DTO;
 using BlogApp.Interfaces;
+using BlogApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
@@ -38,6 +40,16 @@ namespace BlogApp.Controllers
                 return NotFound();
             }
             return Ok(post);
+        }
+
+        [HttpPost("add")]
+        public async Task<IActionResult> AddPost([FromBody] PostDTO postDTO)
+        {
+
+
+         await _postService.AddPostAsync(postDTO);
+
+            return CreatedAtAction(nameof(GetPost), new {id = postDTO.Id}, value:null);
         }
 
     }

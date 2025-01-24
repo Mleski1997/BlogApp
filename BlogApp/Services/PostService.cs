@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using BlogApp.Dto;
+﻿
+using BlogApp.DTO;
 using BlogApp.Interfaces;
 using BlogApp.Models;
 
@@ -12,6 +12,17 @@ namespace BlogApp.Services
         public PostService(IPostRepository postRepository)
         {
             _postRepository = postRepository;
+        }
+
+        public async Task AddPostAsync(PostDTO postDTO)
+        {
+            var Post = new Post
+            {
+                Title = postDTO.Title,
+                Content = postDTO.Content,
+                CreatedAt = DateTime.Now,
+            };
+            await _postRepository.AddPostAsync(Post);
         }
 
         public async Task<IEnumerable<Post>> GetAllPostsAsync()

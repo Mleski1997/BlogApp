@@ -1,4 +1,5 @@
-﻿using BlogApp.Dto;
+﻿
+using BlogApp.DTO;
 using BlogApp.Models;
 
 namespace BlogApp.Interfaces
@@ -7,6 +8,7 @@ namespace BlogApp.Interfaces
     {
         Task<IEnumerable<Post>> GetAllPostsAsync();
         Task<Post> GetPostAsync(int id);
+        Task AddPostAsync(PostDTO postDTO);
         
     }
 }

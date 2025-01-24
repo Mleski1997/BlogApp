@@ -15,6 +15,12 @@ namespace BlogApp.Repository
             _context = context;
         }
 
+        public async Task AddPostAsync(Post post)
+        {
+            _context.Posts.AddAsync(post);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Post>> GetAllPostsAsync()
         {
            return await _context.Posts.ToListAsync();
