@@ -1,33 +1,36 @@
+using BlogApp.Data;
+using BlogApp.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class PostController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+      
+        private readonly IPostService _postService;
 
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public PostController(IPostService postService)
         {
-            _logger = logger;
+            _postService = postService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet]
+
+        public async Task<IActionResult> GetAllPosts()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            var posts = await _postService.GetAllPostsAsync();
+            if (posts == null)
             {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                return NotFound();
+            }
+            return Ok(posts);
         }
+
+
+        
+
+        
     }
 }
