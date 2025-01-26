@@ -6,8 +6,8 @@ namespace BlogApp.Interfaces
 {
     public interface IPostService 
     {
-        Task<IEnumerable<Post>> GetAllPostsAsync();
-        Task<Post> GetPostAsync(int id);
+        Task<IEnumerable<PostDTO>> GetAllPostsAsync();
+        Task<PostDTO> GetPostAsync(int id);
         Task AddPostAsync(PostDTO postDTO);
         Task DeletePostAsync(int id);
         

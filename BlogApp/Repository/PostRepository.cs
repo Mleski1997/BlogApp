@@ -39,7 +39,7 @@ namespace BlogApp.Repository
 
         public async Task<Post> GetPostAsync(int id)
         {
-            return _context.Posts.FirstOrDefault(i => i.Id == id);
+            return await _context.Posts.FirstOrDefaultAsync(i => i.Id == id);
         }
     }
 }
