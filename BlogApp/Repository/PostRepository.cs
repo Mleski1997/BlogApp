@@ -17,13 +17,13 @@ namespace BlogApp.Repository
 
         public async Task AddPostAsync(Post post)
         {
-            _context.Posts.AddAsync(post);
+            await _context.Posts.AddAsync(post);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeletePostAsync(Post post)
         {
-            _context.Posts.Remove(post);
+             _context.Posts.Remove(post);
             await _context.SaveChangesAsync();
         }
 

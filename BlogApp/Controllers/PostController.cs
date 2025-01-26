@@ -51,11 +51,13 @@ namespace BlogApp.Controllers
                 return BadRequest(ModelState);
             }
 
-          await _postService.AddPostAsync(postDTO);
-          return CreatedAtAction(nameof(GetPost), new {id = postDTO.Id}, value:null);
+         await _postService.AddPostAsync(postDTO);
+         var post = _postService.GetPostAsync(postDTO.Id); 
+
+          return CreatedAtAction(nameof(GetPost), new {id = postDTO.Id}, value:post);
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("{id}")]
 
         public async Task<IActionResult> DeletePost(int id)
         {

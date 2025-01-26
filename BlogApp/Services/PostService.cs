@@ -31,12 +31,8 @@ namespace BlogApp.Services
 
         public async Task DeletePostAsync(int id)
         {
-            var postExist = await _postRepository.GetPostAsync(id);
-            if (postExist == null)
-            {
-                throw new ArgumentException("Post doesnt exist");
-            }
-            var post = await _postRepository.GetPostAsync(id);
+            var post = await _postRepository.GetPostAsync(id)
+                ?? throw new ArgumentException("Post doesn't exits");
             await _postRepository.DeletePostAsync(post);
         }
 
