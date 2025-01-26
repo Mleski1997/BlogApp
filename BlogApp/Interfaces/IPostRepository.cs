@@ -8,5 +8,7 @@ namespace BlogApp.Interfaces
         Task<Post>GetPostAsync(int id);
         Task AddPostAsync(Post post);
         Task DeletePostAsync(Post post);
+        Task <bool>ExistingByTitleAsync(string title);
+
     }
 }

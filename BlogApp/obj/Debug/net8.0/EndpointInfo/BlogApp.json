@@ -97,6 +97,10 @@
   "components": {
     "schemas": {
       "PostDTO": {
+        "required": [
+          "content",
+          "title"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -104,12 +108,13 @@
             "format": "int32"
           },
           "title": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
           },
           "content": {
-            "type": "string",
-            "nullable": true
+            "minLength": 20,
+            "type": "string"
           },
           "createdAt": {
             "type": "string",

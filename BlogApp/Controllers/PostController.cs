@@ -3,6 +3,7 @@ using BlogApp.DTO;
 using BlogApp.Interfaces;
 using BlogApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BlogApp.Controllers
 {
@@ -45,6 +46,11 @@ namespace BlogApp.Controllers
         [HttpPost("add")]
         public async Task<IActionResult> AddPost([FromBody] PostDTO postDTO)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
           await _postService.AddPostAsync(postDTO);
           return CreatedAtAction(nameof(GetPost), new {id = postDTO.Id}, value:null);
         }

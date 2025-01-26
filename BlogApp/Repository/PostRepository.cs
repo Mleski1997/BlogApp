@@ -27,6 +27,11 @@ namespace BlogApp.Repository
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> ExistingByTitleAsync(string title)
+        {
+            return await _context.Posts.AnyAsync(p => p.Title == title);
+        }
+
         public async Task<IEnumerable<Post>> GetAllPostsAsync()
         {
            return await _context.Posts.ToListAsync();
