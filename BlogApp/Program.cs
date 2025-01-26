@@ -1,5 +1,6 @@
 using AutoMapper;
 using BlogApp.Data;
+using BlogApp.Helper;
 using BlogApp.Interfaces;
 using BlogApp.Repository;
 using BlogApp.Services;
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
