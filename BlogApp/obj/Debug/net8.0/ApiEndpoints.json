@@ -11,24 +11,8 @@
   },
   {
     "ContainingType": "BlogApp.Controllers.PostController",
-    "Method": "GetPost",
-    "RelativePath": "Post/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BlogApp.Controllers.PostController",
     "Method": "AddPost",
-    "RelativePath": "Post/add",
+    "RelativePath": "Post",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -43,16 +27,32 @@
   },
   {
     "ContainingType": "BlogApp.Controllers.PostController",
+    "Method": "GetPost",
+    "RelativePath": "Post/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApp.Controllers.PostController",
     "Method": "DeletePost",
-    "RelativePath": "Post/delete",
+    "RelativePath": "Post/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Type": "System.Guid",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

@@ -33,7 +33,7 @@ namespace BlogApp.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetPost(int id)
+        public async Task<IActionResult> GetPost(Guid id)
         {
             var post = await _postService.GetPostAsync(id);
             if (post == null)
@@ -43,7 +43,7 @@ namespace BlogApp.Controllers
             return Ok(post);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> AddPost([FromBody] PostDTO postDTO)
         {
             if(!ModelState.IsValid)
@@ -59,10 +59,10 @@ namespace BlogApp.Controllers
 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeletePost(int id)
+        public async Task<IActionResult> DeletePost(Guid id)
         {
             await _postService.DeletePostAsync(id);
-            return Ok();
+            return NoContent();
         }
     }
 }

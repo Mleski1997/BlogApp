@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using BlogApp.DTO;
+using BlogApp.Exceptions;
 using BlogApp.Interfaces;
 using BlogApp.Models;
 
@@ -21,29 +22,38 @@ namespace BlogApp.Services
         {
 
             if  (await _postRepository.ExistingByTitleAsync(postDTO.Title))
-                throw new ArgumentException("A post with this title already exist.");
+                throw new ArgumentException("A post with this title already exists.");
 
             var post = _mapper.Map<Post>(postDTO); 
             await _postRepository.AddPostAsync(post);   
         }
 
-        public async Task DeletePostAsync(int id)
+        public async Task DeletePostAsync(Guid id)
         {
-            var post = await _postRepository.GetPostAsync(id)
-                ?? throw new ArgumentException("Post doesn't exits");
+            var post = await _postRepository.GetPostAsync(id);
+
+            if (post == null)
+            {
+                throw new NotFoundPostByIdException();
+            }
+   
             await _postRepository.DeletePostAsync(post);
         }
 
-        public async Task<IEnumerable<Post>> GetAllPostsAsync()
+        public async Task<IEnumerable<PostDTO>> GetAllPostsAsync()
         {
             var posts = await _postRepository.GetAllPostsAsync();
-            return _mapper.Map<IEnumerable<Post>>(posts);
+            return _mapper.Map<IEnumerable<PostDTO>>(posts);
         }
 
-        public async Task<Post> GetPostAsync(int id)
+        public async Task<PostDTO> GetPostAsync(Guid id)
         {
             var post = await _postRepository.GetPostAsync(id);
-            return _mapper.Map<Post>(post);
+            if (post == null)
+            {
+                throw new NotFoundPostByIdException();
+            }
+            return _mapper.Map<PostDTO>(post);
         }
     }
 }

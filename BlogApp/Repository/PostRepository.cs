@@ -2,7 +2,6 @@
 using BlogApp.Interfaces;
 using BlogApp.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
 
 namespace BlogApp.Repository
 {
@@ -37,7 +36,7 @@ namespace BlogApp.Repository
            return await _context.Posts.ToListAsync();
         }
 
-        public async Task<Post> GetPostAsync(int id)
+        public async Task<Post> GetPostAsync(Guid id)
         {
             return await _context.Posts.FirstOrDefaultAsync(i => i.Id == id);
         }
