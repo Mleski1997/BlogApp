@@ -29,7 +29,7 @@ namespace BlogApp.Migrations
                 name: "Comments",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AuthorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -37,23 +37,13 @@ namespace BlogApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Comments", x => x.id);
+                    table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.InsertData(
-                table: "Posts",
-                columns: new[] { "Id", "Content", "CreatedAt", "Title" },
-                values: new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "hello its my test description", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Test Title1" });
-
-            migrationBuilder.InsertData(
-                table: "Comments",
-                columns: new[] { "id", "AuthorName", "Content", "CreatedAt", "PostId" },
-                values: new object[] { new Guid("22222222-2222-2222-2222-222222222222"), "Author 1", "test test test", new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new Guid("11111111-1111-1111-1111-111111111111") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostId",

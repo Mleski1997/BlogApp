@@ -1,6 +1,13 @@
-﻿namespace BlogApp.Interfaces
+﻿using BlogApp.Models;
+
+namespace BlogApp.Interfaces
 {
-    public class ICommentRepository
+    public interface ICommentRepository
     {
+        Task<IEnumerable<Comment>> GetAllCommentsAsync();
+        Task<Comment> GetCommentByIdAsync(Guid id);
+        Task AddCommentAsync(Comment comment);
+        Task DeleteCommentAsync(Comment comment);
+
     }
 }

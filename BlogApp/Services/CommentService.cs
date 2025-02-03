@@ -17,18 +17,18 @@ namespace BlogApp.Services
             _commentRepository = commentRepository;
             _mapper = mapper;
         }
-        public async Task AddCommentAsync(CommentDTO commnetDTO)
+        public async Task AddCommentAsync(CommentDTO commentDTO)
         {
-            var comment = _mapper.Map<Comment>(commnetDTO);
+            var comment = _mapper.Map<Comment>(commentDTO);
             await _commentRepository.AddCommentAsync(comment);
         }
 
-        public async Task DeletePostAsync(Guid id)
+        public async Task DeleteCommentAsync(Guid id)
         {
             var comment = await _commentRepository.GetCommentByIdAsync(id);
             if (comment == null)
             {
-                throw new NotFoundPostByIdException();
+                throw new NotFoundCommentByIdException();          
             }
 
             await _commentRepository.DeleteCommentAsync(comment);

@@ -16,24 +16,24 @@ namespace BlogApp.Repository
 
         public async Task AddCommentAsync(Comment comment)
         {
-            await _context.AddAsync(comment);
+            await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteCommentAsync(Comment comment)
         {
-                _context.Remove(comment);
+            _context.Remove(comment);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Comment>> GetAllAsync()
+        public async Task<IEnumerable<Comment>> GetAllCommentsAsync()
         {
            return await _context.Comments.ToListAsync();
         }
 
         public async Task<Comment> GetCommentByIdAsync(Guid id)
         {
-            return await _context.Comments.FirstOrDefaultAsync(i => i.id == id);
+            return await _context.Comments.FirstOrDefaultAsync(i => i.Id == id);
         }
     }
 }

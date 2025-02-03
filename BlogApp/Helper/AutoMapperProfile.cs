@@ -9,6 +9,9 @@ namespace BlogApp.Helper
         public AutoMapperProfile()
         {
             CreateMap<Post, PostDTO>();
+            CreateMap<PostDTO, Post>();
+            CreateMap<Comment, CommentDTO>();
+            CreateMap<CommentDTO, Comment>();
         }
     }
 }

@@ -1,5 +1,63 @@
 [
   {
+    "ContainingType": "BlogApp.Controllers.CommentController",
+    "Method": "GetAllComments",
+    "RelativePath": "Comment",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApp.Controllers.CommentController",
+    "Method": "AddComment",
+    "RelativePath": "Comment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "commentDTO",
+        "Type": "BlogApp.DTO.CommentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApp.Controllers.CommentController",
+    "Method": "DeleteComment",
+    "RelativePath": "Comment",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApp.Controllers.CommentController",
+    "Method": "GetComment",
+    "RelativePath": "Comment/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BlogApp.Controllers.PostController",
     "Method": "GetAllPosts",
     "RelativePath": "Post",

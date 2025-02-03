@@ -4,6 +4,7 @@ namespace BlogApp.Models
 {
     public class Comment
     {
+        [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
         public string AuthorName { get; set; } = "Anonymus";
         [Required]

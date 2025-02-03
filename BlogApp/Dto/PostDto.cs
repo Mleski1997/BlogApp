@@ -14,6 +14,6 @@ namespace BlogApp.DTO
         [MinLength(20, ErrorMessage = "Description must be longer than 20 characters")]
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+       
     }
 }

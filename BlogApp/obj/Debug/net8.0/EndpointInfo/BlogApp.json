@@ -5,6 +5,90 @@
     "version": "1.0"
   },
   "paths": {
+    "/Comment": {
+      "get": {
+        "tags": [
+          "Comment"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Comment"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CommentDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Comment/{id}": {
+      "get": {
+        "tags": [
+          "Comment"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Post": {
       "get": {
         "tags": [
@@ -93,7 +177,7 @@
   },
   "components": {
     "schemas": {
-      "Comment": {
+      "CommentDTO": {
         "required": [
           "content",
           "postId"
@@ -120,43 +204,6 @@
           "postId": {
             "type": "string",
             "format": "uuid"
-          },
-          "post": {
-            "$ref": "#/components/schemas/Post"
-          }
-        },
-        "additionalProperties": false
-      },
-      "Post": {
-        "required": [
-          "content",
-          "title"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "title": {
-            "maxLength": 100,
-            "minLength": 0,
-            "type": "string"
-          },
-          "content": {
-            "minLength": 20,
-            "type": "string"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "comments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Comment"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -184,13 +231,6 @@
           "createdAt": {
             "type": "string",
             "format": "date-time"
-          },
-          "comments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Comment"
-            },
-            "nullable": true
           }
         },
         "additionalProperties": false

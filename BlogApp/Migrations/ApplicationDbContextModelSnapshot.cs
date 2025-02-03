@@ -24,7 +24,7 @@ namespace BlogApp.Migrations
 
             modelBuilder.Entity("BlogApp.Models.Comment", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -43,21 +43,11 @@ namespace BlogApp.Migrations
                     b.Property<Guid>("PostId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("PostId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            id = new Guid("22222222-2222-2222-2222-222222222222"),
-                            AuthorName = "Author 1",
-                            Content = "test test test",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PostId = new Guid("11111111-1111-1111-1111-111111111111")
-                        });
                 });
 
             modelBuilder.Entity("BlogApp.Models.Post", b =>
@@ -81,15 +71,6 @@ namespace BlogApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Posts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
-                            Content = "hello its my test description",
-                            CreatedAt = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Test Title1"
-                        });
                 });
 
             modelBuilder.Entity("BlogApp.Models.Comment", b =>

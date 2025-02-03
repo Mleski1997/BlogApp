@@ -13,8 +13,8 @@ namespace BlogApp.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            var postId = Guid.Parse("11111111-1111-1111-1111-111111111111");
-            var commandId = Guid.Parse("22222222-2222-2222-2222-222222222222");
+            //var postId = Guid.Parse("11111111-1111-1111-1111-111111111111");
+            //var commandId = Guid.Parse("22222222-2222-2222-2222-222222222222");
 
             base.OnModelCreating(modelBuilder);
 
@@ -25,22 +25,22 @@ namespace BlogApp.Data
                 .IsRequired(false);
 
 
-            modelBuilder.Entity<Post>().HasData(new Post
-            {
-                Id = postId,
-                Title = "Test Title1",
-                Content = "hello its my test description",
-                CreatedAt = new DateTime(2025, 01, 01),
-            });
+            //modelBuilder.Entity<Post>().HasData(new Post
+            //{
+            //    Id = postId,
+            //    Title = "Test Title1",
+            //    Content = "hello its my test description",
+            //    CreatedAt = new DateTime(2025, 01, 01),
+            //});
 
-            modelBuilder.Entity<Comment>().HasData(new Comment
-            {
-                id = commandId,
-                Content = "test test test",
-                AuthorName = "Author 1",
-                CreatedAt = new DateTime(2025, 01, 01),
-                PostId = postId,
-            });
+            //modelBuilder.Entity<Comment>().HasData(new Comment
+            //{
+            //    Id = commandId,
+            //    Content = "test test test",
+            //    AuthorName = "Author 1",
+            //    CreatedAt = new DateTime(2025, 01, 01),
+            //    PostId = postId,
+            //});
 
 
         }
