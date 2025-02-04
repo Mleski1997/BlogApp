@@ -1,10 +1,12 @@
 ﻿using BlogApp.Exceptions;
 using BlogApp.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApp.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -12,11 +14,44 @@ namespace BlogApp.Data
         public DbSet<Comment> Comments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
-            //var postId = Guid.Parse("11111111-1111-1111-1111-111111111111");
-            //var commandId = Guid.Parse("22222222-2222-2222-2222-222222222222");
-
             base.OnModelCreating(modelBuilder);
+
+            //var adminId = "A1B2C3D4-E5F6-1234-5678-90ABCDEF1234";
+            //var roleId = "B1C2D3E4-F5G6-2345-6789-0ABCDEF56789";
+
+
+            //var adminRole = new IdentityRole
+            //{
+            //    Id = roleId,
+            //    Name = "Admin",
+            //    NormalizedName = "ADMIN"
+            //};
+
+            //modelBuilder.Entity<IdentityRole>().HasData(adminRole);
+
+            //var adminUser = new AppUser
+            //{
+            //    Id = adminId,
+            //    UserName = "Admin",
+            //    NormalizedUserName = "ADMIN",
+            //    Email = "admin@blogapi.com",
+            //    NormalizedEmail = "ADMIN@BLOGAPI.com",
+            //    EmailConfirmed = true,
+            //    SecurityStamp = Guid.NewGuid().ToString(),
+            //    ConcurrencyStamp = Guid.NewGuid().ToString(),
+            //};
+
+            //var hasher = new PasswordHasher<AppUser>();
+            //adminUser.PasswordHash = hasher.HashPassword(adminUser, "adminPassword123.");
+
+            //modelBuilder.Entity<AppUser>().HasData(adminUser);
+
+            //modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            //{
+            //    UserId = adminId,
+            //    RoleId = roleId
+            //});
+
 
             modelBuilder.Entity<Post>()
                 .HasMany(e => e.Comments)
@@ -24,26 +59,9 @@ namespace BlogApp.Data
                 .HasForeignKey(e => e.PostId)
                 .IsRequired(false);
 
-
-            //modelBuilder.Entity<Post>().HasData(new Post
-            //{
-            //    Id = postId,
-            //    Title = "Test Title1",
-            //    Content = "hello its my test description",
-            //    CreatedAt = new DateTime(2025, 01, 01),
-            //});
-
-            //modelBuilder.Entity<Comment>().HasData(new Comment
-            //{
-            //    Id = commandId,
-            //    Content = "test test test",
-            //    AuthorName = "Author 1",
-            //    CreatedAt = new DateTime(2025, 01, 01),
-            //    PostId = postId,
-            //});
-
-
         }
+       
 
     }
+   
 }
