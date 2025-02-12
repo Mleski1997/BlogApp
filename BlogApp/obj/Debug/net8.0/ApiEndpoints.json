@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "BlogApp.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "BlogApp.DTO.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "BlogApp.Controllers.CommentController",
     "Method": "GetAllComments",
     "RelativePath": "Comment",

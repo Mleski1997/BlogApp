@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace BlogApp.Interfaces
 {
-    public interface IAccountService
+    public interface IAuthService
     {
-        
+        Task<string> Login(LoginDTO loginDTO);
     }
 }
