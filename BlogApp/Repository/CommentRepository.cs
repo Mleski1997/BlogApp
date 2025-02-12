@@ -35,5 +35,14 @@ namespace BlogApp.Repository
         {
             return await _context.Comments.FirstOrDefaultAsync(i => i.Id == id);
         }
+
+        public async Task<List<Comment>> GetPostCommentsAsync(Guid postId)
+        {
+            return await _context.Comments
+                .Where(c => c.PostId == postId && c.ParentCommentId == null)
+                .Include(c => c.Replies)
+                .ToListAsync();
+
+        }
     }
 }

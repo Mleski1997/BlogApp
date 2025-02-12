@@ -1,4 +1,5 @@
 ﻿using BlogApp.DTO;
+using BlogApp.Models;
 
 namespace BlogApp.Interfaces
 {
@@ -6,7 +7,8 @@ namespace BlogApp.Interfaces
     {
         Task<IEnumerable<CommentDTO>> GetAllCommentsAsync();
         Task<CommentDTO> GetCommentAsync(Guid id);
-        Task AddCommentAsync(CommentDTO commnetDTO);
+        Task<List<CommentDTO>> GetPostCommentsAsync(Guid postId);
+        Task <Comment>AddCommentAsync(CreateCommentDTO createCommentDTO);
         Task DeleteCommentAsync(Guid id);
     }
 }

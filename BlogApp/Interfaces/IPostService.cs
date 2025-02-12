@@ -8,7 +8,7 @@ namespace BlogApp.Interfaces
     {
         Task<IEnumerable<PostDTO>> GetAllPostsAsync();
         Task<PostDTO> GetPostAsync(Guid id);
-        Task AddPostAsync(PostDTO postDTO);
+        Task<Post> AddPostAsync(CreatePostDTO createPostDTO);
         Task DeletePostAsync(Guid id);
         
     }

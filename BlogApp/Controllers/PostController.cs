@@ -2,11 +2,13 @@
 using BlogApp.DTO;
 using BlogApp.Interfaces;
 using BlogApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BlogApp.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class PostController : ControllerBase
@@ -44,17 +46,18 @@ namespace BlogApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPost([FromBody] PostDTO postDTO)
+        public async Task<IActionResult> AddPost([FromBody] CreatePostDTO createPostDTO)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _postService.AddPostAsync(postDTO);
-            var post = await _postService.GetPostAsync(postDTO.Id); 
+            var createdPost = await _postService.AddPostAsync(createPostDTO);
 
-            return CreatedAtAction(nameof(GetPost), new {id = postDTO.Id}, value:post);
+            var post = await _postService.GetPostAsync(createdPost.Id);
+
+            return CreatedAtAction(nameof(GetPost), new {id = post.Id}, value:post);
         }
 
         [HttpDelete("{id}")]

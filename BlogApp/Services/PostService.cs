@@ -18,14 +18,16 @@ namespace BlogApp.Services
             _mapper = mapper;
         }
 
-        public async Task AddPostAsync(PostDTO postDTO)
+        public async Task<Post> AddPostAsync(CreatePostDTO createPostDTO)
         {
 
-            if  (await _postRepository.ExistingByTitleAsync(postDTO.Title))
+            if  (await _postRepository.ExistingByTitleAsync(createPostDTO.Title))
                 throw new ArgumentException("A post with this title already exists.");
 
-            var post = _mapper.Map<Post>(postDTO); 
-            await _postRepository.AddPostAsync(post);   
+            var post = _mapper.Map<Post>(createPostDTO); 
+            await _postRepository.AddPostAsync(post);
+
+            return post;
         }
 
         public async Task DeletePostAsync(Guid id)

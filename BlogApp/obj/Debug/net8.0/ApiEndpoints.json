@@ -34,25 +34,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "commentDTO",
-        "Type": "BlogApp.DTO.CommentDTO",
+        "Name": "createCommentDTO",
+        "Type": "BlogApp.DTO.CreateCommentDTO",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "BlogApp.Controllers.CommentController",
-    "Method": "DeleteComment",
-    "RelativePath": "Comment",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Guid",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -67,6 +51,59 @@
     "Parameters": [
       {
         "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApp.Controllers.CommentController",
+    "Method": "DeleteComment",
+    "RelativePath": "Comment/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApp.Controllers.CommentController",
+    "Method": "AddReply",
+    "RelativePath": "Comment/{parentCommentId}/reply",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "parentCommentId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "createCommentDTO",
+        "Type": "BlogApp.DTO.CreateCommentDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "BlogApp.Controllers.CommentController",
+    "Method": "GetPostComments",
+    "RelativePath": "Comment/post/{postId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postId",
         "Type": "System.Guid",
         "IsRequired": true
       }
@@ -92,8 +129,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "postDTO",
-        "Type": "BlogApp.DTO.PostDTO",
+        "Name": "createPostDTO",
+        "Type": "BlogApp.DTO.CreatePostDTO",
         "IsRequired": true
       }
     ],

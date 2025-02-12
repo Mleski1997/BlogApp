@@ -1,5 +1,6 @@
 ﻿using BlogApp.DTO;
 using BlogApp.Interfaces;
+using BlogApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApp.Controllers
@@ -19,11 +20,15 @@ namespace BlogApp.Controllers
         public async Task<IActionResult> GetAllComments()
         {
             var comments = await _commentService.GetAllCommentsAsync();
-            if (comments == null)
-            {
-                return NotFound();
-            }
+        
+            return Ok(comments);
+        }
 
+        [HttpGet("post/{postId}")]
+        public async Task<IActionResult> GetPostComments(Guid postId)
+        {
+            var comments = await _commentService.GetPostCommentsAsync(postId);
+            
             return Ok(comments);
         }
 
@@ -31,33 +36,52 @@ namespace BlogApp.Controllers
         public async Task<IActionResult> GetComment(Guid id)
         {
             var comment = await _commentService.GetCommentAsync(id);
-            if (comment == null)
-            {
-                return NotFound();
-            }
+           
             return Ok(comment);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddComment([FromBody] CommentDTO commentDTO)
+        public async Task<IActionResult> AddComment([FromBody] CreateCommentDTO createCommentDTO)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _commentService.AddCommentAsync(commentDTO);
-            var createdComment = await _commentService.GetCommentAsync(commentDTO.Id);
-            return CreatedAtAction(nameof(GetComment), new { id = commentDTO.Id}, createdComment);
 
+            var createdComment = await _commentService.AddCommentAsync(createCommentDTO);
+
+            return CreatedAtAction(nameof(GetComment), new { id = createdComment.Id }, createdComment);
         }
 
-        [HttpDelete]
-        public async Task <IActionResult> DeleteComment(Guid id)
-        {   
+        [HttpPost("{parentCommentId}/reply")]
+        public async Task<IActionResult> AddReply(Guid parentCommentId, [FromBody] CreateCommentDTO createCommentDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var parentComment = await _commentService.GetCommentAsync(parentCommentId);
+            if (parentComment == null)
+            {
+                return NotFound($"Parent comment with id {parentCommentId} not found.");
+            }
+
+            createCommentDTO.ParentCommentId = parentCommentId;
+            createCommentDTO.PostId = parentComment.PostId;
+
+            var createdReply = await _commentService.AddCommentAsync(createCommentDTO);
+            return CreatedAtAction(nameof(GetComment), new { id = createdReply.Id }, createdReply);
+        }
+        
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteComment(Guid id)
+        {
             await _commentService.DeleteCommentAsync(id);
             return NoContent();
         }
-        
     }
 }
+    

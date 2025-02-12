@@ -12,6 +12,10 @@ namespace BlogApp.Helper
             CreateMap<PostDTO, Post>();
             CreateMap<Comment, CommentDTO>();
             CreateMap<CommentDTO, Comment>();
+            CreateMap<CreatePostDTO, Post>();
+            CreateMap<Post, CreatePostDTO>();
+            CreateMap<Comment, CreateCommentDTO>();
+            CreateMap<CreateCommentDTO, Comment>();
         }
     }
 }

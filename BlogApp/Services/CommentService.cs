@@ -17,10 +17,12 @@ namespace BlogApp.Services
             _commentRepository = commentRepository;
             _mapper = mapper;
         }
-        public async Task AddCommentAsync(CommentDTO commentDTO)
+
+        public async Task<Comment> AddCommentAsync(CreateCommentDTO createCommentDTO)
         {
-            var comment = _mapper.Map<Comment>(commentDTO);
+            var comment = _mapper.Map<Comment>(createCommentDTO);
             await _commentRepository.AddCommentAsync(comment);
+            return comment;
         }
 
         public async Task DeleteCommentAsync(Guid id)
@@ -28,9 +30,8 @@ namespace BlogApp.Services
             var comment = await _commentRepository.GetCommentByIdAsync(id);
             if (comment == null)
             {
-                throw new NotFoundCommentByIdException();          
+                throw new NotFoundCommentByIdException();
             }
-
             await _commentRepository.DeleteCommentAsync(comment);
         }
 
@@ -38,7 +39,6 @@ namespace BlogApp.Services
         {
             var comments = await _commentRepository.GetAllCommentsAsync();
             return _mapper.Map<IEnumerable<CommentDTO>>(comments);
-
         }
 
         public async Task<CommentDTO> GetCommentAsync(Guid id)
@@ -46,9 +46,15 @@ namespace BlogApp.Services
             var comment = await _commentRepository.GetCommentByIdAsync(id);
             if (comment == null)
             {
-                throw new NotFoundPostByIdException();
+                throw new NotFoundCommentByIdException();
             }
             return _mapper.Map<CommentDTO>(comment);
+        }
+
+        public async Task<List<CommentDTO>> GetPostCommentsAsync(Guid postId)
+        {
+            var comments = await _commentRepository.GetPostCommentsAsync(postId);
+            return _mapper.Map<List<CommentDTO>>(comments);
         }
     }
 }

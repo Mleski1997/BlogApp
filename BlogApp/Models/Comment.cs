@@ -16,5 +16,9 @@ namespace BlogApp.Models
         public Guid PostId { get; set; }
         public Post Post { get; set; }
 
+        public Guid? ParentCommentId { get; set; }
+        public Comment ParentComment { get; set; }
+        public List<Comment> Replies { get; set; } = new List<Comment>();
+
     }
 }
