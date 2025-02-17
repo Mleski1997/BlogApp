@@ -9,8 +9,5 @@ namespace BlogApp.DTO
         [StringLength(1000)]
         public string Content { get; set; }
 
-        [Required]
-        public Guid PostId { get; set; }
-        public Guid? ParentCommentId { get; set; }
     }
 }

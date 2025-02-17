@@ -8,7 +8,8 @@ namespace BlogApp.Interfaces
         Task<IEnumerable<CommentDTO>> GetAllCommentsAsync();
         Task<CommentDTO> GetCommentAsync(Guid id);
         Task<List<CommentDTO>> GetPostCommentsAsync(Guid postId);
-        Task <Comment>AddCommentAsync(CreateCommentDTO createCommentDTO);
+        Task<Comment>AddCommentAsync(Guid postId, CreateCommentDTO createCommentDTO);
+        Task<Comment>AddReplyAsync(Guid postId, Guid parentCommentId, CreateCommentDTO createCommentDTO);
         Task DeleteCommentAsync(Guid id);
     }
 }

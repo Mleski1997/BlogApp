@@ -51,6 +51,16 @@
         "tags": [
           "Comment"
         ],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -150,6 +160,14 @@
           "Comment"
         ],
         "parameters": [
+          {
+            "name": "postId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
           {
             "name": "parentCommentId",
             "in": "path",
@@ -276,8 +294,7 @@
     "schemas": {
       "CreateCommentDTO": {
         "required": [
-          "content",
-          "postId"
+          "content"
         ],
         "type": "object",
         "properties": {
@@ -289,15 +306,6 @@
             "maxLength": 1000,
             "minLength": 0,
             "type": "string"
-          },
-          "postId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "parentCommentId": {
-            "type": "string",
-            "format": "uuid",
-            "nullable": true
           }
         },
         "additionalProperties": false

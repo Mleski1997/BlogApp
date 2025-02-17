@@ -14,7 +14,8 @@ namespace BlogApp.DTO
         [Required]
         public Guid PostId { get; set; }
         public Guid? ParentCommentId { get; set; }
-        
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
 
     }
 }

@@ -18,9 +18,19 @@ namespace BlogApp.Services
             _mapper = mapper;
         }
 
-        public async Task<Comment> AddCommentAsync(CreateCommentDTO createCommentDTO)
+        public async Task<Comment> AddCommentAsync(Guid postId, CreateCommentDTO createCommentDTO)
         {
             var comment = _mapper.Map<Comment>(createCommentDTO);
+            comment.PostId = postId;
+            await _commentRepository.AddCommentAsync(comment);
+            return comment;
+        }
+
+        public async Task<Comment> AddReplyAsync(Guid postId, Guid parentCommentId, CreateCommentDTO createCommentDTO)
+        {
+            var comment = _mapper.Map<Comment>(createCommentDTO);
+            comment.PostId = postId;
+            comment.ParentCommentId = parentCommentId;
             await _commentRepository.AddCommentAsync(comment);
             return comment;
         }

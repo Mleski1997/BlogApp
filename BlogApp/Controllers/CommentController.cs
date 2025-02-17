@@ -41,37 +41,27 @@ namespace BlogApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddComment([FromBody] CreateCommentDTO createCommentDTO)
+        public async Task<IActionResult> AddComment(Guid postId, [FromBody] CreateCommentDTO createCommentDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-
-            var createdComment = await _commentService.AddCommentAsync(createCommentDTO);
+            var createdComment = await _commentService.AddCommentAsync(postId, createCommentDTO);
 
             return CreatedAtAction(nameof(GetComment), new { id = createdComment.Id }, createdComment);
         }
 
         [HttpPost("{parentCommentId}/reply")]
-        public async Task<IActionResult> AddReply(Guid parentCommentId, [FromBody] CreateCommentDTO createCommentDTO)
+        public async Task<IActionResult> AddReply(Guid postId, Guid parentCommentId,[FromBody] CreateCommentDTO createCommentDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var parentComment = await _commentService.GetCommentAsync(parentCommentId);
-            if (parentComment == null)
-            {
-                return NotFound($"Parent comment with id {parentCommentId} not found.");
-            }
-
-            createCommentDTO.ParentCommentId = parentCommentId;
-            createCommentDTO.PostId = parentComment.PostId;
-
-            var createdReply = await _commentService.AddCommentAsync(createCommentDTO);
+            var createdReply = await _commentService.AddReplyAsync(postId, parentCommentId, createCommentDTO);
             return CreatedAtAction(nameof(GetComment), new { id = createdReply.Id }, createdReply);
         }
         
