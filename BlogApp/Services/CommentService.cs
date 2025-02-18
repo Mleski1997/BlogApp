@@ -11,15 +11,23 @@ namespace BlogApp.Services
     {
         private readonly ICommentRepository _commentRepository;
         private readonly IMapper _mapper;
+        private readonly IPostRepository _postRepository;
 
-        public CommentService(ICommentRepository commentRepository, IMapper mapper)
+        public CommentService(ICommentRepository commentRepository, IMapper mapper, IPostRepository postRepository)
         {
             _commentRepository = commentRepository;
             _mapper = mapper;
+            _postRepository = postRepository;
         }
 
         public async Task<Comment> AddCommentAsync(Guid postId, CreateCommentDTO createCommentDTO)
         {
+            var post = await _postRepository.GetPostAsync(postId);
+            if (post == null)
+            {
+                throw new NotFoundPostByIdException(postId);
+            }
+
             var comment = _mapper.Map<Comment>(createCommentDTO);
             comment.PostId = postId;
             await _commentRepository.AddCommentAsync(comment);
@@ -28,6 +36,18 @@ namespace BlogApp.Services
 
         public async Task<Comment> AddReplyAsync(Guid postId, Guid parentCommentId, CreateCommentDTO createCommentDTO)
         {
+            var post = await _postRepository.GetPostAsync(postId);
+            if (post == null)
+            {
+                throw new NotFoundPostByIdException(postId);
+            }
+            var parentComment = await _commentRepository.GetCommentByIdAsync(parentCommentId);
+            
+            if (parentComment == null)
+            {
+                throw new NotFoundCommentByIdException(parentCommentId);
+            }
+
             var comment = _mapper.Map<Comment>(createCommentDTO);
             comment.PostId = postId;
             comment.ParentCommentId = parentCommentId;
